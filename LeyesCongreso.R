@@ -41,10 +41,10 @@ for (j in 1:176) {
   saveRDS(Hojas,file = paste0("Leyes/Hojas_",j,".rds"))
   
   # Hacer clic en sigiuente hasta 176
-    SiguienteHoja<-Browser$findElement(using = "css",
+  SiguienteHoja<-Browser$findElement(using = "css",
                                      value = "#ctl00_ContentPlaceHolder1_GwDetalle_ctl23_ImgBtnSiguiente") #Es Id
-    SiguienteHoja$clickElement()
-     #Que descance un rato
+  SiguienteHoja$clickElement()
+  #Que descance un rato
   Sys.sleep(4)  
 }
 
@@ -160,7 +160,7 @@ library(pdftools)
 library(tesseract)
 
 ReadPDF<-pdf_ocr_text(PdfUrl,
-                            pages = c(1:2),language = "spa",dpi = 600) #
+                      pages = c(1:2),language = "spa",dpi = 600) #
 
 
 
@@ -200,4 +200,3 @@ Hoja2 <- Hoja2[c(1:20),]
 #---- cerrar la sesión #----
 Browser$close()
 server$stop()
-
