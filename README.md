@@ -45,7 +45,6 @@ A través de web scraping se puede extraer el contenido.
 * Líder del proyecto: [Abner Casallo](https://www.linkedin.com/in/abner-francisco-casallo-trauco-b331b983/)
 
 * Miembros:
-[Jose Laura](https://www.linkedin.com/in/jose-luis-laura-pumaleque/)
-
-[Jhon Figueroa](https://www.linkedin.com/in/jhon-vidal-figueroa-c%C3%A9spedes-166837124/)
+-[Jose Laura](https://www.linkedin.com/in/jose-luis-laura-pumaleque/)
+-[Jhon Figueroa](https://www.linkedin.com/in/jhon-vidal-figueroa-c%C3%A9spedes-166837124/)
 
