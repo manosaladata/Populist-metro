@@ -46,5 +46,6 @@ A través de web scraping se puede extraer el contenido.
 
 * Miembros:
 [Jose Laura](https://www.linkedin.com/in/jose-luis-laura-pumaleque/)
+
 [Jhon Figueroa](https://www.linkedin.com/in/jhon-vidal-figueroa-c%C3%A9spedes-166837124/)
 
