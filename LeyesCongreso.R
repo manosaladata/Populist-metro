@@ -51,11 +51,19 @@ for (j in 2:177) {
     html_node(css = "#ctl00_ContentPlaceHolder1_GwDetalle")%>%
     html_table(header = T)
   
+<<<<<<< HEAD
   Hojas <- Hojas%>%
     mutate(Hoja=j)
   #Juntamos la data con rbind
   HojasTabla <- rbind(HojasTabla,Hojas)
    #Que descance un rato
+=======
+  # Hacer clic en sigiuente hasta 176
+  SiguienteHoja<-Browser$findElement(using = "css",
+                                     value = "#ctl00_ContentPlaceHolder1_GwDetalle_ctl23_ImgBtnSiguiente") #Es Id
+  SiguienteHoja$clickElement()
+  #Que descance un rato
+>>>>>>> 649dd686e4eb97f8e7a0fc17c147a225b664198a
   Sys.sleep(4)  
 }
 
@@ -238,6 +246,7 @@ for (j in 2:177) {
   Sys.sleep(4)  
 }
 
+<<<<<<< HEAD
 #Guardamos la data sucia
 saveRDS(DataUrlNorma,"Leyes/DataUrlNormaBruta.rds")
 
@@ -281,6 +290,10 @@ ProyectosLeyUrl <- UnionDataNeta1[,7]
 
 #Correr el browser
 options(encoding = "utf-8") # Le asignamos el encoding
+=======
+ReadPDF<-pdf_ocr_text(PdfUrl,
+                      pages = c(1:2),language = "spa",dpi = 600) #
+>>>>>>> 649dd686e4eb97f8e7a0fc17c147a225b664198a
 
 #Abrimos una sesion en la web
 # Ejecutamos el servidor phantomjs -creamos un navegador fantasma
@@ -660,4 +673,3 @@ Browser$screenshot(display=TRUE) # si salío
 #---- cerrar la sesión #----
 Browser$close()
 server$stop()
-
