@@ -7,6 +7,7 @@ library(gridExtra)
 library(rsconnect)
 library(hrbrthemes)
 library(plotly)
+library(RColorBrewer)
 library("leaflet.extras")
 #source("modules/DT_mod.R")
 source("modules/map.R")
@@ -133,9 +134,9 @@ df_info<- data.frame(Entradas, PartidoA, PartidoB, PartidoC)
 
 
 
-leyes<-c("2018","2019")
-Populistas<-c(1,5)
-No_populistas<-c(2,7)
+leyes<-c("Enero","Febrero", "Marzo", "Abril")
+Populistas<-c(1,5,1,4)
+No_populistas<-c(2,4,5,4)
 df_leyes<-data.frame(leyes, No_populistas, Populistas)
 #df_leyes
 
@@ -225,24 +226,36 @@ ui <- dashboardPage(title="POPULISTÓMETRO", skin="blue",  #Color del encabezado
                       ),
                       tabItems(tabItem(tabName = "num", 
                                        fluidRow(
-                                         column(width=6,
+                                         #column(width=6,
                                        valueBoxOutput("num_ley"),
                                        valueBoxOutput("num_con"),
-                                       valueBoxOutput("num_costb"),
+                                       valueBoxOutput("num_costb")),
+                                       fluidRow(
                                        valueBox(2,"Leyes emitidas en menos de dos semanas
                                                     ",  #df group agrupa a los congresistas
-                                                icon=icon("dashboard"),color="yellow"))),
+                                                icon=icon("dashboard"),color="red"),
+                                       valueBox(7,"Partidos Políticos analizados
+                                                    ",  #df group agrupa a los congresistas
+                                                icon=icon("dashboard"),color="light-blue"),
+                                       valueBox("4 Meses","Periodo: Enero-Abril",
+                                                icon=icon("hourglass-3"),color="red")
+                                       # ,imageOutput("bandera", width="100%",height="150px"
+                                       # )
+                                       ),
                                        # fluidRow(column(width=8,
                                        #                 infoBox("Transparencia","100%",icon=icon("thumbs-up")),
                                        #                 infoBox("Dato abiertos", "100%")
                                        # )),
                                        
-                                       fluidRow(column(width=12,
-                                                       box(leafletOutput(("mapa"))),
-                                                       column(width=6,
-                                                       box(plotlyOutput("pop")))
+                                       
+                                       fluidRow(
+                                                       box(title="Distribución de congresistas por Región",
+                                                           leafletOutput(("mapa"))),
+                                                       
+                                                       box(title="Termómetro de Populismo",
+                                                           plotlyOutput("pop"))
                                                 
-                                                )
+                                                
                                        )
       
                       ), tabItem(tabName = "plot",
@@ -302,9 +315,9 @@ server <- function(input
                    , output) {
   
   output$num_ley<-renderInfoBox({valueBox(count((df)[1]),"Leyes analizadas", 
-                                      icon=icon("eye"),color="red")})
+                                      icon=icon("eye"),color="blue")})
   output$num_con<-renderInfoBox({valueBox(count(df_group[1]),"Congresistas",  #df group agrupa a los congresistas
-                                        icon=icon("dashboard"),color="green")}) 
+                                        icon=icon("dashboard"),color="red")}) 
   output$num_costb<-renderInfoBox({valueBox(sum(df_costb$num_leyes),"Leyes con costo Beneficio defectuoso",  #df group agrupa a los congresistas
                                           icon=icon("dashboard"),color="blue")}) 
  
@@ -337,6 +350,9 @@ react2<-reactive(ggplot(proyectos, aes(x=fechas_proyectos, y=.data[[input$ngear2
   output$plot2 <-renderPlot(react2())
   output$pop<- renderPlotly(fig)
   output$mapa <- renderLeaflet(mapa) 
+  output$bandera <- renderImage({
+    return(list(src = "bandera.png",contentType = "image/png",height = "150px"))
+  }, deleteFile = FALSE)
 
 
   
